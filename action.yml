@@ -1,0 +1,60 @@
+name: MoonABI Check
+description: Verify a MoonBit C FFI binding against its committed ABI lock
+
+inputs:
+  config:
+    description: Path to moonabi.json
+    required: false
+    default: moonabi.json
+  lock:
+    description: Path to moonabi.lock
+    required: false
+    default: moonabi.lock
+  format:
+    description: Report format: text, json, or markdown
+    required: false
+    default: text
+  cc:
+    description: Optional C compiler command
+    required: false
+    default: ""
+  working-directory:
+    description: Directory containing the target project
+    required: false
+    default: "."
+
+runs:
+  using: composite
+  steps:
+    - name: Install MoonBit
+      shell: bash
+      run: |
+        curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+        echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+
+    - name: Install MoonABI dependencies
+      shell: bash
+      run: moon -C "$GITHUB_ACTION_PATH" install
+
+    - name: Run MoonABI
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      env:
+        MOONABI_CONFIG: ${{ inputs.config }}
+        MOONABI_LOCK: ${{ inputs.lock }}
+        MOONABI_FORMAT: ${{ inputs.format }}
+        MOONABI_CC: ${{ inputs.cc }}
+      run: |
+        case "$MOONABI_CONFIG" in
+          /*) config="$MOONABI_CONFIG" ;;
+          *) config="$(pwd)/$MOONABI_CONFIG" ;;
+        esac
+        case "$MOONABI_LOCK" in
+          /*) lock="$MOONABI_LOCK" ;;
+          *) lock="$(pwd)/$MOONABI_LOCK" ;;
+        esac
+        args=(check --config "$config" --lock "$lock" --format "$MOONABI_FORMAT")
+        if [ -n "$MOONABI_CC" ]; then
+          args+=(--cc "$MOONABI_CC")
+        fi
+        moon -C "$GITHUB_ACTION_PATH" run cmd/main --target native -- "${args[@]}"

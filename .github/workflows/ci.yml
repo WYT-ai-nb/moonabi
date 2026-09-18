@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install MoonBit
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+
+      - name: Show toolchain
+        run: moon version --all
+
+      - name: Install dependencies
+        run: |
+          moon update
+          moon install
+
+      - name: Check library
+        run: moon check --target native
+
+      - name: Test pure core
+        run: moon test --target wasm-gc
+
+      - name: Test Clang AST import
+        run: |
+          moon run cmd/main --target wasm-gc -- import \
+            --ast fixtures/clang/demo-ast.json \
+            --header demo.h \
+            --name demo-binding \
+            --config /tmp/moonabi-import.json
+
+      - name: Test native bridge
+        run: moon test --target native
+
+      - name: Verify C ABI examples
+        run: |
+          for example in demo vector events; do
+            moon run cmd/main --target native -- inspect \
+              --config "examples/$example/moonabi.json" \
+              --lock "examples/$example/moonabi.lock"
+            moon run cmd/main --target native -- check \
+              --config "examples/$example/moonabi.json" \
+              --lock "examples/$example/moonabi.lock"
+          done
