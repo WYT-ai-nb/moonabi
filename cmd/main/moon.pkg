@@ -1,0 +1,7 @@
+import {
+  "WYT-ai-nb/moonabi/src" @moonabi,
+  "moonbitlang/core/env",
+  "moonbitlang/x/sys",
+}
+
+pkgtype(kind: "executable")
