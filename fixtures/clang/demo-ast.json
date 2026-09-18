@@ -1,0 +1,132 @@
+{
+  "kind": "TranslationUnitDecl",
+  "inner": [
+    {
+      "kind": "TypedefDecl",
+      "name": "demo_handle",
+      "type": {
+        "qualType": "struct demo_handle"
+      },
+      "loc": {
+        "file": "/project/include/demo.h"
+      },
+      "inner": [
+        {
+          "kind": "RecordDecl",
+          "tagUsed": "struct",
+          "name": "demo_handle",
+          "completeDefinition": false,
+          "loc": {
+            "file": "/project/include/demo.h"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "RecordDecl",
+      "tagUsed": "struct",
+      "name": "demo_config",
+      "completeDefinition": true,
+      "loc": {
+        "file": "/project/include/demo.h"
+      },
+      "inner": [
+        {
+          "kind": "FieldDecl",
+          "name": "flags",
+          "type": {
+            "qualType": "uint32_t"
+          },
+          "loc": {
+            "file": "/project/include/demo.h"
+          }
+        },
+        {
+          "kind": "FieldDecl",
+          "name": "reserved",
+          "type": {
+            "qualType": "uint32_t"
+          },
+          "loc": {
+            "file": "/project/include/demo.h"
+          }
+        },
+        {
+          "kind": "FieldDecl",
+          "name": "timeout_ms",
+          "type": {
+            "qualType": "int64_t"
+          },
+          "loc": {
+            "file": "/project/include/demo.h"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "EnumDecl",
+      "name": "",
+      "completeDefinition": true,
+      "loc": {
+        "file": "/project/include/demo.h"
+      },
+      "inner": [
+        {
+          "kind": "EnumConstantDecl",
+          "name": "DEMO_FLAG_COMPRESSED",
+          "loc": {
+            "file": "/project/include/demo.h"
+          }
+        },
+        {
+          "kind": "EnumConstantDecl",
+          "name": "DEMO_FLAG_SECURE",
+          "loc": {
+            "file": "/project/include/demo.h"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "FunctionDecl",
+      "name": "demo_create",
+      "type": {
+        "qualType": "demo_handle *(const demo_config *)"
+      },
+      "loc": {
+        "file": "/project/include/demo.h"
+      }
+    },
+    {
+      "kind": "FunctionDecl",
+      "name": "demo_destroy",
+      "type": {
+        "qualType": "void (demo_handle *)"
+      },
+      "loc": {
+        "file": "/project/include/demo.h"
+      }
+    },
+    {
+      "kind": "FunctionDecl",
+      "name": "demo_timeout",
+      "type": {
+        "qualType": "int64_t (const demo_handle *)"
+      },
+      "loc": {
+        "file": "/project/include/demo.h"
+      }
+    },
+    {
+      "kind": "FunctionDecl",
+      "name": "system_function",
+      "type": {
+        "qualType": "void (int)"
+      },
+      "loc": {
+        "file": "/usr/include/stdlib.h"
+      }
+    }
+  ]
+}
+
