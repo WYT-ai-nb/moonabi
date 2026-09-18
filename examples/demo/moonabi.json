@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "name": "demo-native-binding",
+  "headers": [
+    "demo.h"
+  ],
+  "compiler": "",
+  "compiler_args": [
+    "-std=c11"
+  ],
+  "include_dirs": [
+    "examples/demo/include"
+  ],
+  "sources": [
+    "examples/demo/demo.c"
+  ],
+  "libraries": [],
+  "types": [
+    {
+      "name": "demo_config",
+      "c_type": "demo_config",
+      "fields": [
+        {
+          "name": "flags"
+        },
+        {
+          "name": "reserved"
+        },
+        {
+          "name": "timeout_ms"
+        }
+      ]
+    }
+  ],
+  "constants": [
+    {
+      "name": "DEMO_FLAG_COMPRESSED"
+    },
+    {
+      "name": "DEMO_FLAG_SECURE"
+    }
+  ],
+  "symbols": [
+    {
+      "name": "demo_create",
+      "returns": "demo_handle *",
+      "params": [
+        "const demo_config *"
+      ],
+      "convention": "c"
+    },
+    {
+      "name": "demo_destroy",
+      "returns": "void",
+      "params": [
+        "demo_handle *"
+      ],
+      "convention": "c"
+    },
+    {
+      "name": "demo_set_log_callback",
+      "returns": "int32_t",
+      "params": [
+        "demo_handle *",
+        "demo_log_callback",
+        "void *"
+      ],
+      "convention": "c"
+    },
+    {
+      "name": "demo_timeout",
+      "returns": "int64_t",
+      "params": [
+        "const demo_handle *"
+      ],
+      "convention": "c"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "target": "linux-x86_64",
+  "compiler": "clang",
+  "types": [
+    {
+      "name": "demo_config",
+      "size": "16",
+      "align": "8",
+      "fields": [
+        {
+          "name": "flags",
+          "offset": "0"
+        },
+        {
+          "name": "reserved",
+          "offset": "4"
+        },
+        {
+          "name": "timeout_ms",
+          "offset": "8"
+        }
+      ]
+    }
+  ],
+  "constants": [
+    {
+      "name": "DEMO_FLAG_COMPRESSED",
+      "value": "1"
+    },
+    {
+      "name": "DEMO_FLAG_SECURE",
+      "value": "2"
+    }
+  ],
+  "symbols": [
+    {
+      "name": "demo_create",
+      "present": true
+    },
+    {
+      "name": "demo_destroy",
+      "present": true
+    },
+    {
+      "name": "demo_set_log_callback",
+      "present": true
+    },
+    {
+      "name": "demo_timeout",
+      "present": true
+    }
+  ]
+}
