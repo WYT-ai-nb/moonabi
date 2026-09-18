@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "name": "vector-native-binding",
+  "headers": [
+    "vector.h"
+  ],
+  "compiler": "",
+  "compiler_args": [
+    "-std=c11"
+  ],
+  "include_dirs": [
+    "examples/vector/include"
+  ],
+  "sources": [
+    "examples/vector/vector.c"
+  ],
+  "libraries": [],
+  "types": [
+    {
+      "name": "vector_config",
+      "c_type": "vector_config",
+      "fields": [
+        {
+          "name": "capacity"
+        },
+        {
+          "name": "flags"
+        },
+        {
+          "name": "seed"
+        }
+      ]
+    }
+  ],
+  "constants": [
+    {
+      "name": "VECTOR_FLAG_GROW"
+    },
+    {
+      "name": "VECTOR_FLAG_ZERO"
+    }
+  ],
+  "symbols": [
+    {
+      "name": "vector_create",
+      "returns": "vector_handle *",
+      "params": [
+        "const vector_config *"
+      ],
+      "convention": "c"
+    },
+    {
+      "name": "vector_destroy",
+      "returns": "void",
+      "params": [
+        "vector_handle *"
+      ],
+      "convention": "c"
+    },
+    {
+      "name": "vector_length",
+      "returns": "int64_t",
+      "params": [
+        "const vector_handle *"
+      ],
+      "convention": "c"
+    }
+  ]
+}
+

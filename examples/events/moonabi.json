@@ -1,0 +1,83 @@
+{
+  "schema": 1,
+  "name": "events-native-binding",
+  "headers": [
+    "events.h"
+  ],
+  "compiler": "",
+  "compiler_args": [
+    "-std=c11"
+  ],
+  "include_dirs": [
+    "examples/events/include"
+  ],
+  "sources": [
+    "examples/events/events.c"
+  ],
+  "libraries": [],
+  "types": [
+    {
+      "name": "event_info",
+      "c_type": "event_info",
+      "fields": [
+        {
+          "name": "kind"
+        },
+        {
+          "name": "priority"
+        },
+        {
+          "name": "timestamp"
+        }
+      ]
+    }
+  ],
+  "constants": [
+    {
+      "name": "EVENT_INFO"
+    },
+    {
+      "name": "EVENT_WARNING"
+    },
+    {
+      "name": "EVENT_ERROR"
+    }
+  ],
+  "symbols": [
+    {
+      "name": "event_bus_new",
+      "returns": "event_bus *",
+      "params": [
+        "const event_info *"
+      ],
+      "convention": "c"
+    },
+    {
+      "name": "event_bus_free",
+      "returns": "void",
+      "params": [
+        "event_bus *"
+      ],
+      "convention": "c"
+    },
+    {
+      "name": "event_bus_subscribe",
+      "returns": "int32_t",
+      "params": [
+        "event_bus *",
+        "event_sink",
+        "void *"
+      ],
+      "convention": "c"
+    },
+    {
+      "name": "event_bus_count",
+      "returns": "int64_t",
+      "params": [
+        "const event_bus *"
+      ],
+      "convention": "c"
+    }
+  ]
+}
+
