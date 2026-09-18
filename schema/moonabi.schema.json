@@ -1,0 +1,169 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://moonabi.dev/schema/moonabi.schema.json",
+  "title": "MoonABI Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "name",
+    "headers",
+    "compiler",
+    "compiler_args",
+    "include_dirs",
+    "sources",
+    "libraries",
+    "types",
+    "constants",
+    "symbols"
+  ],
+  "properties": {
+    "schema": {
+      "const": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "headers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "compiler": {
+      "type": "string"
+    },
+    "compiler_args": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "include_dirs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "libraries": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "types": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/type_contract"
+      }
+    },
+    "constants": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/constant_contract"
+      }
+    },
+    "symbols": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/symbol_contract"
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+    },
+    "type_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "c_type",
+        "fields"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/identifier"
+        },
+        "c_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/field_contract"
+          }
+        }
+      }
+    },
+    "field_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/identifier"
+        }
+      }
+    },
+    "constant_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/identifier"
+        }
+      }
+    },
+    "symbol_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "returns",
+        "params",
+        "convention"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/identifier"
+        },
+        "returns": {
+          "type": "string",
+          "minLength": 1
+        },
+        "params": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "convention": {
+          "enum": [
+            "c",
+            "system"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,132 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://moonabi.dev/schema/moonabi-lock.schema.json",
+  "title": "MoonABI Lock",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "target",
+    "compiler",
+    "types",
+    "constants",
+    "symbols"
+  ],
+  "properties": {
+    "schema": {
+      "const": 1
+    },
+    "target": {
+      "type": "string",
+      "minLength": 1
+    },
+    "compiler": {
+      "type": "string",
+      "minLength": 1
+    },
+    "types": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/type_fact"
+      }
+    },
+    "constants": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/constant_fact"
+      }
+    },
+    "symbols": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/symbol_fact"
+      }
+    }
+  },
+  "$defs": {
+    "int64_string": {
+      "type": "string",
+      "pattern": "^-?[0-9]+$"
+    },
+    "type_fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "size",
+        "align",
+        "fields"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "size": {
+          "$ref": "#/$defs/int64_string"
+        },
+        "align": {
+          "$ref": "#/$defs/int64_string"
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/field_fact"
+          }
+        }
+      }
+    },
+    "field_fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "offset"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "offset": {
+          "$ref": "#/$defs/int64_string"
+        }
+      }
+    },
+    "constant_fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "$ref": "#/$defs/int64_string"
+        }
+      }
+    },
+    "symbol_fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "present"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "present": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}
+
